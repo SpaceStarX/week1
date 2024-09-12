@@ -1,0 +1,24 @@
+apiVersion: redis.tencentcloud.crossplane.io/v1alpha1
+kind: Instance
+metadata:
+  name: myang-redis
+spec:
+  forProvider:
+    name: "myang-redis"
+    availabilityZone: "ap-hongkong-2"
+    chargeType: "POSTPAID"
+    memSize: 256 
+    passwordSecretRef:
+      name: redis-password-secret
+      namespace: default
+      key: password
+    vpcId: "vpc-3ko43scw"
+    subnetId: "subnet-f0ed3kh1"
+    securityGroups: ["sg-o9j9fjln"]
+    projectId: 0
+    typeId: 8
+    port: 6379 
+    redisReplicasNum: 1
+  writeConnectionSecretToRef:
+    name: redis-connection-secret
+    namespace: default
